@@ -124,13 +124,13 @@ INSERT INTO `RATING` VALUES(5,4,5,4);
 
   select * from customer;
   
-  -- 3)	Display the number of the customer group by their genders who have placed any order of amount greater than or equal to Rs.3000.
+ -- 3)	Display the number of the customer group by their genders who have placed any order of amount greater than or equal to Rs.3000.
   
 select cus_gender, count(*)
  from `order`  inner join customer on `order`.cus_id = customer.cus_id 
 where ord_amount >= 3000 group by customer.cus_gender;
   
-  -- 4)	Display all the orders along with the product name ordered by a customer having Customer_Id=2.
+ -- 4)	Display all the orders along with the product name ordered by a customer having Customer_Id=2.
   
 select * from `order` inner join product_details
 on `order`.prod_id = product_details.prod_id 
@@ -138,7 +138,7 @@ inner join product on
 product_details.pro_id = product.pro_id
 where cus_id = 2;
   
-  -- 5)	Display the Supplier details who can supply more than one product.
+ -- 5)	Display the Supplier details who can supply more than one product.
 select * from supplier where supp_id IN 
 (select supp_id from product_details group by supp_id having count(*)> 1);
 
@@ -178,3 +178,5 @@ case
     ELSE 'Supplier should not be considered'
 END AS verdict from rating inner join supplier on supplier.supp_id=rating.supp_id;
 END
+
+call categorize_supplier;
